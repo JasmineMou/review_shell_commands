@@ -1,8 +1,9 @@
 #### Resources
-- [ ] coursera ["Command Line in Linux"](https://www.coursera.org/learn/command-line-linux/supplement/MhGNK/project-based-course-overview)
+- [x] coursera ["Command Line in Linux"](https://www.coursera.org/learn/command-line-linux/supplement/MhGNK/project-based-course-overview)
+- [ ] [interviewbit](https://www.interviewbit.com/courses/shell/)
 - [ ] [hackerrank](https://www.hackerrank.com/domains/shell)
 - [ ] [leetcode](https://leetcode.com/problemset/shell/)
-- [ ] [interviewbit](https://www.interviewbit.com/courses/shell/)
+
 
 
 ### Coursera "Command Line in Linux"
@@ -80,6 +81,7 @@ https://www.thegeekstuff.com/2011/10/grep-or-and-not-operators/#:~:text=Using%20
 - `cat`: create single/multiple files, view contents, concatenate files, and redirect outputs to terminal or files
 
 
+### InterviewBit
 
 
 
