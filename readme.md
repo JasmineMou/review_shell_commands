@@ -41,14 +41,23 @@ Summary
 #### Make and Remove Files and Directories
 - `mkdir tmp`: make a directory 'tmp'
 - `chmod 700 tmp`: change permissions of tmp to grant rwx access only to user
+
 -- roles: [user, group, world]
--- permission for each role: 'rwx' as read/write/execute 
+
+-- permission for each role: 'rwx' as read/write/execute
+
 -- permission code single: 
+
 111 (binary) == 7 (decimal) == 'rwx'
+
 000 (binary) == 0 (decimal) == '---'
+
 101 (binary) == 5 (decimal) == 'r-x'
+
 -- permission codes combo: 
+
 700 == 7 (decimal) for user + 0 (decimal) for group + 0 (decimal) for world == 'rwx------'
+
 755 == 7 (decimal) for user + 5 (decimal) for group + 5 (decimal) for world == 'rwxr-xr-x'
 - `touch test`: create an empty directory 'test'
 - `cp A B`: copy a directory A to B
