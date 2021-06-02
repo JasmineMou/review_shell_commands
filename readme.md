@@ -82,6 +82,402 @@ https://www.thegeekstuff.com/2011/10/grep-or-and-not-operators/#:~:text=Using%20
 
 
 ### InterviewBit
+1. `cut`: select sections of text from each line of files.
+
+Get columns 1 to 5
+```
+cat data.csv | cut -c 1-5
+```
+
+Set delimiter and get 1st field
+```
+cat data.csv | cut -d "," -f 1
+```
+
+
+2. `grep`
+
+Match all words starting with 'Ind'
+```
+cat /usr/share/dict/words | grep "Ind.*"
+```
+
+Match all words ending with 'age'
+```
+cat /usr/share/dict/words | grep ".*age$"
+```
+
+Match all pattern which starts with q and doesn’t follow by u
+```
+cat /usr/share/dict/words | grep "q." | grep -v "qu"
+```
+
+Get information about all ethernet interfaces using `-A` (after) flag
+```
+ifconfig | grep "en[0-9]" -A 4
+```
+
+Recursively search for a keyword and also get filename using `-H` (filename), `-R` (recursive), `-i` (case-insensitive) flag 
+```
+grep -HRi "json" *
+```
+
+https://man7.org/linux/man-pages/man1/grep.1.html
+
+
+3. piping
+A pipe is a form of redirection that is used in Linux and other Unix-like operating systems to send the output of one program to another program for further processing.
+
+Print unique second digits from 1 ~ 30
+```
+for i in {1..30}; do echo $i; done | cut -c 2 | sort | uniq
+```
+
+- Print 1 to 30
+```
+for i in {1..30}; do echo $i; done 
+```
+- print the second digits of the given inputs
+```
+cut -c 2 
+```
+https://www.geeksforgeeks.org/cut-command-linux-examples/
+- sort the given input
+```
+sort 
+```
+- filter only unique digits
+```
+uniq
+```
+
+
+4. `sort`, `uniq`
+
+Sorting by the second field ( Flag -k used to select a field for sorting)
+```
+cat words.txt | sort -k 2
+```
+
+Filter out repeated lines in a file
+```
+cat nums.txt | uniq
+```
+
+Select unique lines along with their count using -c (count) flag {count, line}
+```
+cat nums.txt | uniq -c
+```
+
+
+5. `head`, `tail`, `tr`
+
+`head` and `tail` are used to print n top or bottom lines respectively.
+
+Get lines from 345 o 360
+```
+cat /usr/share/dict/words | head -360 | tail -15
+```
+
+`tr` Replacing or removing specific characters from the input.
+
+Reverse the case
+```
+cat data.csv | tr '[a-z][A-Z]' '[A-Z][a-z]'
+```
+
+Replace each digit with x
+```
+cat data.csv | tr '[0-9]' 'x'
+```
+
+Remove consecutive duplicate alphanumerics using -s (squash) flag
+```
+cat data.csv | tr -s '[0-9A-Za-z]'
+```
+
+Remove all digits using -d (delete) flag
+```
+cat data.csv | tr -d '[0-9]'
+```
+
+
+6. conditional statements
+
+If-else statement
+```
+num=5
+if [ $num -lt 0 ]; then
+	echo "number is negative";
+elif [ $num -lt 10]; then
+	echo "number is less than 10";
+else
+	echo "number is equal or greater than 10";
+fi
+```
+
+
+7. loops
+
+for loop
+```
+for i in {5..10};
+do 
+	echo $i;
+done
+```
+
+while loop
+```
+i=1
+while [ $i -le 20]
+do 
+	echo "$i"
+	i=$(($i+1))
+done
+```
+
+
+8. regex
+
+The main uses for Regular Expressions (REs) are text searches and string manipulation. An RE matches a single character or a set of characters -- a string or a part of a string.
+
+regex metacharacters
+- `.`: match any signle character except the new line character (\n)
+- `*`: match 0+ occurence of the immediate preceding character
+- `<`: match the beginning of a word
+- `>`: match the ending of a word
+- `^`: match the beginning of a line
+- `$`: match the ending of a line
+- `{m}`: match the exact regex 'm'
+- `{m,}`: match 1+ regx 'm'
+- `{m,n}`: match the preceding regex 'm' to 'n' times
+
+regex metaclasses
+- `[:alnum:]` or `[a-zA-Z0-9]`: alphanumeric characters
+- `[:digit:]` or `[0-9]`: digits
+- `[:punct:]`: punctuations 
+
+regex to match all words ending with 'ing'
+```
+<.*ing\>
+```
+
+regex to match all words containing 'quu' or 'quuu' and such
+```
+qu{2,}
+```
+
+match all lines starting with non-vowel and end with a vowel using grep
+```
+cat lite.txt | grep "^[^aeiou].*[aeiou]$"
+```
+
+
+9. `sed`, `awk`
+
+`sed` is a powerful text stream editor which can do insertion, deletion, search, and replace
+
+Replace consecutive multiple 'a' with a single 'a'
+```
+sed 's/a\{2,\}/a/g' cats.txt
+```
+or 
+```
+cat interviewbit/cats.txt | tr -s 'a'
+```
+https://www.cyberciti.biz/faq/how-to-use-sed-to-find-and-replace-text-in-files-in-linux-unix-shell/
+
+`awk` searches files for text containing a pattern and performs a specific action on that line/text
+
+Calculate total number of the students
+```
+awk -F, 'BEGIN {printf "name \t sub1 \t sub2 \t total\n"} {printf "%s \t %s \t %s \t %s\n", $1, $2, $3, $2+$3}' marks.txt
+```
+
+Syntax for tr. option and stringValue2 are optional for tr command. You can use -c, -s and -d option with tr command to do different types of tasks.
+```
+tr [option] stringValue1 [stringValue2]
+```
+https://linuxhint.com/bash_tr_command/
+
+
+10. functions
+
+Define a bash function
+```
+greet() {
+	echo Hello $1
+}
+```
+to execute 
+```
+> greet WORLD!
+```
+output
+```
+hello WORLD!
+```
+
+#### Quiz
+
+1. Valid phone numbers
+Given a text file 'valid_numbers.txt' containing list of phone numbers (one per line), write bash script to print all valid numbers, which are in one of these formats:
+- (xxx)xxx-xxxx
+- xxx-xxx-xxxx
+You may also assume each line in the text file must not contain leading or trailing white spaces.
+
+
+Solution
+
+'input' saved as 'valid_numbers.txt'
+
+```
+cat input | grep '^[0-9]\{3\}\-[0-9]\{3\}\-[0-9]\{4\}$\|^([0-9]\{3\}) [0-9]\{3\}\-[0-9]\{4\}$'
+``` 
+
+Parsing
+- to match (xxx)-xxx-xxxx
+```
+cat input | grep '^([0-9]\{3\}) [0-9]\{3\}\-[0-9]\{4\}$'
+```
+
+- to match xxx-xxx-xxxx
+```
+cat input | grep '^[0-9]\{3\}\-[0-9]\{3\}\-[0-9]\{4\}$'
+```
+
+- to match both pattern A and pattern B
+```
+grep 'A\|B'
+```
+
+
+2. Lines in a given range
+
+Solution
+
+'input' saved as 'lines_in_a_given_range.txt'.
+
+```
+read -r firstline<input
+L=$(echo $firstline | cut -d ' ' -f 1)
+R=$(echo $firstline | cut -d ' ' -f 2)
+head -n $R input | tail -n -$(($R-$L+1))
+```
+
+
+3. Remove punctuations
+
+Solution
+
+'input' saved as 'remove_puncs.txt'
+
+```
+cat input | tr -d [:punct:]
+```
+
+
+4. Transform CSV
+
+Solution
+
+'input' saved as 'transform.csv'
+
+```
+awk -F, '{printf "%s,%s,%s,%s,%s,+%s-%s\n", $1, $2, $3, $4, $6, $5, $7}' input
+```
+
+
+5. Swap forward and backward slash
+
+Solution
+
+'input' saved as 'swap_slash.txt'
+
+note: use `\` in front of a symbol
+
+```
+sed 's+\/+\#+g; s+\\+\/+g; s+\#+\\+g' input
+```
+or 
+```
+cat input | tr '/\\' '\\/'
+```
+
+
+6. ? Sort by frequency ?
+
+
+Solution
+
+'input' saved as 'sort_freq.txt'
+
+
+```
+cat input | tr -s ' ' '\n' | sort | uniq -c | sort | awk -F' ' '$1==last {printf " %s",$2; next} NR>1 {print "";} {last=$1; printf "%s",$0;} END{print "";}' | sed "s/^[ \t]*//"
+```
+
+
+7. ? Valid email address ?
+
+Solution
+
+'input' saved as 'valid_emails.txt'
+
+
+```
+cat input 
+| grep -xv "^[A-Za-z][-_\.\+A-Za-z0-9]*[@][-A-Za-z0-9]*[\.][A-Za-z]*" 
+| grep -xv "^[A-Za-z][-_\.\+A-Za-z0-9]*[@][-A-Za-z0-9]*[\.][A-Za-z]*[\.][A-Za-z]*"
+```
+
+
+8. Convert integer to roman number
+
+Solution
+
+'input' saved as 'int2roman.txt'
+
+```
+A=(Z I II III IV V VI VII VIII IX)
+B=(Z X XX XXX XL L LX LXX LXXX XC)
+C=(Z C CC CCC CD D DC DCC DCCC CM)
+D=(Z M MM MMM MMMM MMMMM MMMMMM MMMMMMM MMMMMMMM MMMMMMMMM)
+
+while read num
+do
+  	if [ $num -ge 1000 ]
+  	then
+  	    th=`expr $num / 1000`
+  	    echo -n "${D[$th]}"
+  	fi
+  	
+  	num=`expr $num % 1000`
+  	
+  	if [ $num -ge 100 ]
+  	then
+  	    h=`expr $num / 100`
+  	    echo -n "${C[$h]}"
+  	fi
+
+  	num=`expr $num % 100`
+
+  	if [ $num -ge 10 ]
+  	then
+  		t=`expr $num / 10`
+  		echo -n "${B[$t]}"
+  	fi
+
+  	num=`expr $num % 10`
+  	if [ $num -ge 1 ]
+  	then
+  		echo -n "${A[$num]}"
+  	fi
+  	echo
+done < input
+```
+
 
 
 
