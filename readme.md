@@ -278,7 +278,9 @@ cat lite.txt | grep "^[^aeiou].*[aeiou]$"
 
 `sed` is a powerful text stream editor which can do insertion, deletion, search, and replace
 
+
 Replace consecutive multiple 'a' with a single 'a'
+https://www.cyberciti.biz/faq/how-to-use-sed-to-find-and-replace-text-in-files-in-linux-unix-shell/
 ```
 sed 's/a\{2,\}/a/g' cats.txt
 ```
@@ -286,9 +288,16 @@ or
 ```
 cat interviewbit/cats.txt | tr -s 'a'
 ```
-https://www.cyberciti.biz/faq/how-to-use-sed-to-find-and-replace-text-in-files-in-linux-unix-shell/
+
+Display but delete lines 1 through 2:
+https://stackoverflow.com/q/25678863/2687773
+```
+sed '1,2d' filename
+```
 
 `awk` searches files for text containing a pattern and performs a specific action on that line/text
+https://opensource.com/article/20/9/awk-ebook
+
 
 Calculate total number of the students
 ```
@@ -296,10 +305,10 @@ awk -F, 'BEGIN {printf "name \t sub1 \t sub2 \t total\n"} {printf "%s \t %s \t %
 ```
 
 Syntax for tr. option and stringValue2 are optional for tr command. You can use -c, -s and -d option with tr command to do different types of tasks.
+https://linuxhint.com/bash_tr_command/
 ```
 tr [option] stringValue1 [stringValue2]
 ```
-https://linuxhint.com/bash_tr_command/
 
 
 10. functions
@@ -480,11 +489,57 @@ done < input
 
 
 
+### Leetcode Bash
+
+192. Word Frequency
+https://leetcode.com/problems/word-frequency/submissions/
+
+Solution
+```
+cat words.txt | tr ' '  '\n' | sort | sed '/^$/d' | uniq -c | sort -r | awk -F ' ' '{printf "%s %s\n", $2, $1}' 
+```
+
+To remove empty line
+``` 
+sed '/^$/d'
+```
 
 
+193. Valid Phone Numbers
+https://leetcode.com/problems/valid-phone-numbers/
+
+Solution
+```
+grep '^[0-9]\{3\}\-[0-9]\{3\}\-[0-9]\{4\}$\|^([0-9]\{3\}) [0-9]\{3\}\-[0-9]\{4\}$' file.txt
+```
 
 
+194. Transpose File
+https://leetcode.com/problems/transpose-file/
 
+Solution
+```
+awk '{
+for (i=1; i<=NF; ++i) {
+    if (NR==1) s[i]=$i;
+    else s[i] = s[i] " " $i;
+}}
+END {
+for (i=1; i<=NF; ++i) {
+    print s[i];
+}} ' file.txt
+```
+
+
+195. Tenth Line
+https://leetcode.com/problems/tenth-line
+- `NR`: number of records
+- `NF`: number of fields
+
+Solution
+```
+awk 'NR==10' file.txt
+```
 
 
 
