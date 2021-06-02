@@ -1,8 +1,9 @@
 #### Resources
 - [x] coursera ["Command Line in Linux"](https://www.coursera.org/learn/command-line-linux/supplement/MhGNK/project-based-course-overview)
-- [ ] [interviewbit](https://www.interviewbit.com/courses/shell/)
+- [x] [interviewbit](https://www.interviewbit.com/courses/shell/)
+- [x] [leetcode](https://leetcode.com/problemset/shell/)
+
 - [ ] [hackerrank](https://www.hackerrank.com/domains/shell)
-- [ ] [leetcode](https://leetcode.com/problemset/shell/)
 
 
 
@@ -543,7 +544,7 @@ awk 'NR==10' file.txt
 
 
 
-
+### Hackerrank
 
 
 
